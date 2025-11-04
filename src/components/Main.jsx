@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import ClaudeRecipe from "./ClaudeRecipe";
 import IngredientsList from "./IngredientsList";
 import { getRecipeFromMistral } from "../ai";
@@ -8,8 +8,18 @@ export default function Main () {
         ['all the main spices', 'pasta', 'ground beef', 'tomato paste']
     );
     const [recipe, setRecipe] = useState('');
+    const recipeSection = useRef(null);
 
-    const hasIngredients = ingredients.length > 0;
+    useEffect(
+        () => {
+            if (recipe !== '' && recipeSection.current !== null) {
+                recipeSection.current.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+        }
+        , [recipe]
+    );
 
     function addIngredient (formData) {
         const newIngredient = formData.get('ingredient').trim();
@@ -39,8 +49,9 @@ export default function Main () {
             </form>
 
             {
-                hasIngredients &&
+                ingredients.length > 0 &&
                 <IngredientsList
+                    ref={recipeSection}
                     ingredients={ingredients}
                     toggleRecipe={getRecipe}
                 />

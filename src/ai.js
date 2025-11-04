@@ -7,7 +7,6 @@ You are an assistant that receives a list of ingredients that a user has and sug
 // Make sure you set an environment variable in Scrimba
 // for HF_ACCESS_TOKEN
 const hf = new InferenceClient(process.env.REACT_APP_HF_ACCESS_TOKEN);
-const HF_TOKEN = process.env.REACT_APP_HF_ACCESS_TOKEN;
 // const MODEL = 'mistralai/Mistral-7B-v0.1';
 const MODEL = 'mistralai/Mistral-7B-Instruct-v0.2';
 // const MODEL = 'HuggingFaceTB/SmolLM3-3B';
